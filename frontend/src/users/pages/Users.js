@@ -1,5 +1,14 @@
 import React from 'react';
+import { UsersList } from '../components/UsersList';
 
 export const Users = () => {
-  return <div>Users Page</div>;
+  const USERS = [
+    {
+      id: '1',
+      name: 'Alex',
+      image: 'images/avatar.jpg',
+      places: 3,
+    },
+  ];
+  return <UsersList items={USERS} />;
 };
