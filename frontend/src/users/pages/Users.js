@@ -4,7 +4,7 @@ import { UsersList } from '../components/UsersList';
 export const Users = () => {
   const USERS = [
     {
-      id: '1',
+      id: 'u1',
       name: 'Alex',
       image: 'images/avatar.jpg',
       places: 3,
