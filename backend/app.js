@@ -1,6 +1,7 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const dotenv = require('dotenv').config();
 const usersRoutes = require('./routes/users-routes');
 const placesRoutes = require('./routes/places-routes');
 const HttpError = require('./models/http-error');
@@ -25,4 +26,11 @@ app.use((error, req, res, next) => {
     .json({ message: error.message || 'An unknown error occurred' });
 });
 
-app.listen(8000);
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.vndt4.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    app.listen(8000);
+  })
+  .catch((err) => console.log(err));
