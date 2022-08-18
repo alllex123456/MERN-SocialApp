@@ -34,11 +34,13 @@ exports.getPlacesByUserId = async (req, res, next) => {
     return next(new HttpError('No places found by that user id', 404));
   }
 
-  res.json({ places });
+  res.json({
+    places: places.map((place) => place.toObject({ getters: true })),
+  });
 };
 
 exports.createPlace = async (req, res, next) => {
-  const { title, imageUrl, location, description, address, creator } = req.body;
+  const { title, description, address, creator } = req.body;
 
   const errors = validationResult({ req });
   if (!errors.isEmpty()) {
@@ -47,8 +49,6 @@ exports.createPlace = async (req, res, next) => {
 
   const createdPlace = new Place({
     title,
-    imageUrl,
-    location,
     description,
     address,
     creator,
@@ -67,7 +67,9 @@ exports.createPlace = async (req, res, next) => {
   }
 
   if (!user) {
-    return next(new HttpError('Could not find a user by this creator id', 401));
+    return next(
+      new HttpError('Could not find a user by this creator id: ' + creator, 401)
+    );
   }
 
   try {

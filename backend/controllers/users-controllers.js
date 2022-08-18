@@ -44,7 +44,8 @@ exports.signup = async (req, res, next) => {
     name,
     email,
     password,
-    imageUrl,
+    imageUrl:
+      'https://static.vecteezy.com/system/resources/thumbnails/001/546/003/small/indian-woman-s-face-avatar-free-vector.jpg',
     places: [],
   });
 

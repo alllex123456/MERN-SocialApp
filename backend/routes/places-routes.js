@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 
 router.get('/:placeId', getPlaceById);
-router.get('/user/:userId', getPlacesByUserId);
+router.get('/:userId/places', getPlacesByUserId);
 router.post(
   '/',
   [
